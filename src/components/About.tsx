@@ -17,7 +17,7 @@ export default function About() {
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
                     <div className="w-20 h-1 bg-indigo-600 mx-auto mb-4"></div>
                     <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                        I am a **Full Stack Developer** specializing in **React Native, Next.js, Laravel, and Node.js**, passionate about building scalable web and mobile applications.
+                        I am a <strong>Full Stack Developer</strong> specializing in <strong>React Native, Next.js, Laravel, and Node.js</strong>, passionate about building scalable web and mobile applications.
                     </p>
                 </motion.div>
 
@@ -48,12 +48,15 @@ export default function About() {
                     >
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Who Am I?</h3>
                         <p className="text-gray-600 dark:text-gray-300 mb-4">
-                            I'm **Tassadaq Hussain**, a Full Stack Developer with expertise in **PHP, Laravel, Node.js, React, Next.js, Vue.js, and React Native**.
-                            I specialize in creating **scalable, high-performance web and mobile applications** that enhance user experience.
+                            I am <strong>Tassadaq Hussain</strong>, a Full Stack Developer with expertise in <strong>PHP, Laravel, Node.js, React, Next.js, Vue.js, and React Native</strong>.
+                            I specialize in creating <strong>scalable, high-performance web and mobile applications</strong> that enhance user experience.
                         </p>
                         <p className="text-gray-600 dark:text-gray-300 mb-6">
-                            With over **10 years of experience**, I have built **eCommerce platforms, SaaS applications, mobile apps, and AI-integrated solutions**.
-                            I focus on **clean code, performance optimization, and user-centric design**.
+                            With over <strong>10 years of experience</strong>, I have built <strong>eCommerce platforms, SaaS applications, mobile apps, and AI-integrated solutions</strong>.
+                            I focus on <strong>clean code, performance optimization, and user-centric design</strong>.
+                        </p>
+                        <p className="text-gray-600 dark:text-gray-300">
+                            I specialize in building SaaS platforms, eCommerce solutions, and AI-integrated applications that enhance users&apos; experiences.
                         </p>
 
                         <div className="grid grid-cols-2 gap-4 mb-8">
