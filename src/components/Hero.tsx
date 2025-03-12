@@ -29,7 +29,7 @@ export default function Hero() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-2">Hello, I'm</p>
+                        <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-2">Hello, I am</p>
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                             Tassadaq Hussain
                         </h1>
@@ -37,7 +37,7 @@ export default function Hero() {
                             <span className="typing-text">{typingText}</span>
                         </div>
                         <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 mb-8">
-                            Experienced in building **scalable web and mobile applications** using **Laravel, Node.js, Next.js, React, Vue.js, and React Native**. Passionate about modern software architecture and optimizing performance.
+                            Experienced in building <strong>scalable web and mobile applications</strong> using <strong>Laravel, Node.js, Next.js, React, Vue.js, and React Native</strong>. Passionate about modern software architecture and optimizing performance.
                         </p>
                         <div className="flex flex-wrap justify-center md:justify-start gap-4">
                             <a
