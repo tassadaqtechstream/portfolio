@@ -21,16 +21,26 @@ export default function Projects() {
     const projects: Project[] = [
         {
             id: 1,
-            title: 'E-commerce Website',
-            description: 'A fully responsive e-commerce platform built with Next.js and Stripe integration.',
-            image: '/projects/project1.jpg',
+            title: 'Easypaisa Karobar',
+            description: 'Professional and high-resolution dashboard interface for the Easypaisa Karobar Merchant Portal, featuring a clean UI, structured payment transactions, and user management insights for seamless business operations.',
+            image: '/projects/easypaisa.png',
             category: 'web',
-            technologies: ['Next.js', 'Tailwind CSS', 'Stripe'],
-            liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
+            technologies: ['React js', 'Bootstrap'],
+            liveUrl: 'https://merchantportal.dukan.pk/',
+            sourceUrl: '',
         },
         {
             id: 2,
+            title: 'Clinic Management',
+            description: 'A clean and modern healthcare system dashboard for EIXSYS, providing real-time insights into clinic locations, providers, specialists, and monthly costs with an intuitive and user-friendly interface.',
+            image: '/projects/provider.png',
+            category: 'web',
+            technologies: ['Laravel', 'Bootstrap','Jquery'],
+            liveUrl: 'https://provider.click4md.com/',
+            sourceUrl: '',
+        },
+        {
+            id: 3,
             title: 'Portfolio Design',
             description: 'A minimalist portfolio design for photographers and artists.',
             image: '/projects/project2.jpg',
@@ -40,7 +50,7 @@ export default function Projects() {
             sourceUrl: 'https://github.com',
         },
         {
-            id: 3,
+            id: 4,
             title: 'Task Management App',
             description: 'A productivity app for managing tasks and schedules.',
             image: '/projects/project3.jpg',
@@ -50,7 +60,7 @@ export default function Projects() {
             sourceUrl: 'https://github.com',
         },
         {
-            id: 4,
+            id: 5,
             title: 'Restaurant Website',
             description: 'A beautiful website for a local restaurant with online ordering.',
             image: '/projects/project4.jpg',
@@ -60,7 +70,7 @@ export default function Projects() {
             sourceUrl: 'https://github.com',
         },
         {
-            id: 5,
+            id: 6,
             title: 'Travel Mobile App',
             description: 'Travel planning mobile app with itinerary management.',
             image: '/projects/project5.jpg',
@@ -70,7 +80,7 @@ export default function Projects() {
             sourceUrl: 'https://github.com',
         },
         {
-            id: 6,
+            id: 7,
             title: 'Dashboard UI Kit',
             description: 'A comprehensive UI kit for building admin dashboards.',
             image: '/projects/project6.jpg',
@@ -198,18 +208,22 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
+                    {
+                        project.sourceUrl && (
+                            <a
+                                href={project.sourceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium inline-flex items-center transition-colors"
+                            >
+                                Source Code
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </a>
+                        )
+                    }
 
-                    <a
-                        href={project.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium inline-flex items-center transition-colors"
-                    >
-                        Source Code
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
-                    </a>
                 </div>
             </div>
         </motion.div>

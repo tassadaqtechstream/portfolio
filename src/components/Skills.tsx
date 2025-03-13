@@ -64,6 +64,7 @@ interface SkillCardProps {
 }
 
 function SkillCard({ skill, index }: SkillCardProps) {
+    console.log(skill);
     return (
         <motion.div
             className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow"
@@ -73,7 +74,7 @@ function SkillCard({ skill, index }: SkillCardProps) {
             transition={{ duration: 0.4, delay: index * 0.1 }}
         >
             <div className="w-16 h-16 mx-auto mb-4 relative">
-                <Image src={`/icons/${skill.icon}`} alt={skill.name} className="w-full h-full object-contain" />
+                <Image src={`/icons/${skill.icon}`} alt={skill.name} width={`50`} height={`50`} className="w-full h-full object-contain" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{skill.name}</h3>
             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
