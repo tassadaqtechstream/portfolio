@@ -31,7 +31,7 @@ export default function About() {
                     >
                         <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg">
                             <Image
-                                src="/profile-image.jpg"
+                                src="/profile_image.jpeg"
                                 alt="Tassadaq Hussain - Full Stack Developer"
                                 fill
                                 style={{ objectFit: 'cover' }}

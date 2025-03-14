@@ -70,7 +70,7 @@ export default function Hero() {
                     >
                         <div className="relative w-full h-72 sm:h-96 md:h-[450px]">
                             <Image
-                                src="/hero-image.svg"
+                                src="/profile_image.jpeg"
                                 alt="Tassadaq Hussain - Full Stack Developer"
                                 fill
                                 style={{ objectFit: 'contain' }}

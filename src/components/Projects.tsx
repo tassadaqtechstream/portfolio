@@ -42,23 +42,23 @@ export default function Projects() {
         {
             id: 3,
             title: 'Portfolio Design',
-            description: 'A minimalist portfolio design for photographers and artists.',
-            image: '/projects/project2.jpg',
+            description: 'A sleek and customizable portfolio app to showcase your work, skills, and achievements professionally.',
+            image: '/projects/portfolio.png',
             category: 'ui',
-            technologies: ['Figma', 'Adobe XD'],
-            liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
+            technologies: ['Figma', 'Tailwind CSS','Next js'],
+            liveUrl: 'https://tassadaq.vercel.app/',
+            sourceUrl: '',
         },
         {
             id: 4,
-            title: 'Task Management App',
-            description: 'A productivity app for managing tasks and schedules.',
-            image: '/projects/project3.jpg',
-            category: 'app',
-            technologies: ['React', 'Firebase', 'Tailwind CSS'],
+            title: 'Aurora Admin Panel',
+            description: 'Aurora Admin Panel – An advanced automation dashboard for managing sneaker bot tasks, tracking checkouts, and optimizing purchases with real-time analytics',
+            image: '/projects/aurora.png',
+            category: 'ui',
+            technologies: ['Html5', 'Bootstrap'],
             liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
-        },
+            sourceUrl: '',
+        }/*,
         {
             id: 5,
             title: 'Restaurant Website',
@@ -88,7 +88,7 @@ export default function Projects() {
             technologies: ['Figma', 'Sketch'],
             liveUrl: 'https://example.com',
             sourceUrl: 'https://github.com',
-        },
+        },*/
     ];
 
     const filteredProjects = filter === 'all'
