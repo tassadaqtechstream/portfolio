@@ -1,24 +1,49 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const outfit = Outfit({ 
+  subsets: ['latin'],
+  variable: '--font-outfit',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-    title: 'Tassadaq Hussain - Full Stack Developer | Laravel, Node.js, Next.js, React, TypeScript',
-    description: 'Experienced Full Stack Developer specializing in Laravel, Node.js, Next.js, TypeScript, React, and Vue.js. Building scalable web and mobile applications with modern technologies.',
-    keywords: 'Full Stack Developer, Laravel Developer, Node.js Developer, Next.js Developer, React Developer, TypeScript Developer, Vue.js Developer, Web Developer, Mobile App Developer, Software Engineer, API Development, JavaScript, PHP, Frontend Developer, Backend Developer, MERN Stack, Full Stack Engineer, Progressive Web Apps, Serverless, SaaS Development',
-    robots: 'index, follow',
-    viewport: 'width=device-width, initial-scale=1.0',
+    title: {
+      default: 'Tassadaq Hussain | Full Stack Developer Portfolio',
+      template: '%s | Tassadaq Hussain'
+    },
+    description: 'Expert Full Stack Developer specializing in Laravel, Node.js, Next.js, and React Native. Explore my portfolio for scalable web and mobile solutions.',
+    keywords: ['Full Stack Developer', 'Laravel Expert', 'Next.js Developer', 'React Native Developer', 'Node.js Specialist', 'Software Engineer Portfolio', 'Tassadaq Hussain', 'Web Development Lahore'],
+    authors: [{ name: 'Tassadaq Hussain', url: 'https://tassadaqhussain.dev' }],
+    creator: 'Tassadaq Hussain',
+    publisher: 'Tassadaq Hussain',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL('https://tassadaqhussain.dev'),
+    alternates: {
+      canonical: '/',
+    },
     openGraph: {
-        title: 'Tassadaq Hussain - Full Stack Developer | Laravel, Node.js, Next.js, React, TypeScript',
-        description: 'Portfolio showcasing expertise in Full Stack Development with Laravel, Node.js, Next.js, TypeScript, React, and Vue.js.',
-        url: 'https://tassadaqhussain.dev', // Replace with your actual domain
+        title: 'Tassadaq Hussain - Full Stack Developer Portfolio',
+        description: 'Building high-performance web and mobile applications with modern technologies.',
+        url: 'https://tassadaqhussain.dev',
+        siteName: 'Tassadaq Hussain Portfolio',
+        locale: 'en_US',
         type: 'website',
         images: [
             {
-                url: '/og-image.png', // Ensure this image exists in the public folder
+                url: '/og-image.png',
                 width: 1200,
                 height: 630,
                 alt: 'Tassadaq Hussain - Full Stack Developer Portfolio',
@@ -27,30 +52,47 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        site: '@yourTwitterHandle', // Replace with your Twitter username
-        creator: '@yourTwitterHandle',
-        title: 'Tassadaq Hussain - Full Stack Developer',
-        description: 'Expert in Laravel, Node.js, Next.js, TypeScript, React, and Vue.js. Building modern web and mobile applications.',
+        title: 'Tassadaq Hussain | Full Stack Developer',
+        description: 'Expert in building scalable applications with Laravel, Next.js, and React Native.',
         images: ['/og-image.png'],
     },
-    icons: {
-        icon: '/favicon.ico',
-        apple: '/apple-touch-icon.png',
-    },
-    alternates: {
-        canonical: 'https://tassadaqhussain.dev', // Ensure consistency in SEO
-    },
-    other: {
-        'theme-color': '#ffffff',
-        'mobile-web-app-capable': 'yes',
-        'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Tassadaq Hussain",
+      "url": "https://tassadaqhussain.dev",
+      "jobTitle": "Full Stack Developer",
+      "description": "Expert Full Stack Developer specializing in Laravel, Node.js, Next.js, and React Native.",
+      "knowsAbout": ["Web Development", "Mobile App Development", "Laravel", "Next.js", "React Native", "Node.js", "TypeScript"],
+      "sameAs": [
+        "https://linkedin.com/in/tassadaqhussain", // Update with actual links
+        "https://github.com/tassadaqhussain"
+      ]
+    };
+
     return (
-        <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
+        <head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+        </head>
+        <body className={`font-sans animated-bg min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
         </ThemeProvider>
@@ -58,3 +100,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </html>
     );
 }
+

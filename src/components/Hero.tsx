@@ -20,62 +20,111 @@ export default function Hero() {
     }, []);
 
     return (
-        <section id="hero" className="pt-20 md:pt-0 md:h-screen flex items-center">
+        <section id="hero" className="relative min-h-screen flex items-center overflow-hidden pt-20">
+            {/* Background ornaments */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+                <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px] animate-pulse" />
+            </div>
+
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-12">
                     <motion.div
                         className="md:w-1/2 text-center md:text-left"
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-2">Hello, I am</p>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-                            Tassadaq Hussain
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 border border-primary/20 backdrop-blur-sm"
+                        >
+                            Available for new opportunities
+                        </motion.div>
+
+                        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold font-outfit text-foreground leading-[1.1] mb-6">
+                            Crafting <span className="text-gradient">Digital</span> Experiences
                         </h1>
-                        <div className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-6 h-8">
-                            <span className="typing-text">{typingText}</span>
+
+                        <div className="text-2xl sm:text-3xl font-medium text-gray-500 dark:text-gray-400 mb-8 h-10 flex justify-center md:justify-start items-center">
+                            <span>I am a&nbsp;</span>
+                            <span className="typing-text text-foreground">{typingText}</span>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 mb-8">
-                            Experienced in building <strong>scalable web and mobile applications</strong> using <strong>Laravel, Node.js, Next.js, React, Vue.js, and React Native</strong>. Passionate about modern software architecture and optimizing performance.
+
+                        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto md:mx-0 mb-10 leading-relaxed font-inter">
+                            Building scalable, high-performance web and mobile applications with
+                            <span className="text-foreground font-medium"> Laravel, Node.js, Next.js, and Tailwind CSS v4</span>.
+                            Turning complex problems into elegant digital solutions.
                         </p>
-                        <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                            <a
+
+                        <div className="flex flex-wrap justify-center md:justify-start gap-5">
+                            <motion.a
                                 href="#projects"
-                                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="px-8 py-4 bg-primary text-white font-bold rounded-2xl shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300"
                             >
-                                View My Work
-                            </a>
-                            <a
+                                View Portfolio
+                            </motion.a>
+                            <motion.a
                                 href="#contact"
-                                className="px-6 py-3 bg-transparent border border-indigo-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-800 font-medium rounded-lg transition-colors"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="glass-card px-8 py-4 text-foreground font-bold rounded-2xl border border-foreground/10 hover:border-foreground/20 transition-all duration-300"
                             >
                                 Contact Me
-                            </a>
-                            <a
-                                href="/Tassadaq_Hussain_Resume.pdf"
-                                className="px-6 py-3 bg-gray-800 hover:bg-gray-900 text-white font-medium rounded-lg transition-colors"
-                                download
-                            >
-                                Download Resume
-                            </a>
+                            </motion.a>
                         </div>
                     </motion.div>
 
                     <motion.div
-                        className="md:w-1/2 mt-12 md:mt-0"
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="md:w-1/2 relative"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                     >
-                        <div className="relative w-full h-72 sm:h-96 md:h-[450px]">
-                            <Image
-                                src="/profile_image.jpeg"
-                                alt="Tassadaq Hussain - Full Stack Developer"
-                                fill
-                                style={{ objectFit: 'contain' }}
-                                priority
-                            />
+                        <div className="relative w-full aspect-square max-w-[500px] mx-auto">
+                            {/* Decorative Frame */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-[40px] rotate-6 opacity-20 animate-float" />
+                            <div className="absolute inset-0 bg-gradient-to-bl from-accent to-primary rounded-[40px] -rotate-3 opacity-20 animate-float [animation-delay:1.5s]" />
+
+                            <div className="relative w-full h-full rounded-[40px] overflow-hidden border-4 border-white/10 shadow-2xl backdrop-blur-sm grayscale-[20%] hover:grayscale-0 transition-all duration-700">
+                                <Image
+                                    src="/profile_image.jpeg"
+                                    alt="Tassadaq Hussain - Full Stack Developer"
+                                    fill
+                                    className="object-cover"
+                                    priority
+                                />
+                                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent" />
+                            </div>
+
+                            {/* Floating Badges */}
+                            <motion.div
+                                animate={{ y: [0, -10, 0] }}
+                                transition={{ repeat: Infinity, duration: 4 }}
+                                className="glass absolute -right-6 top-20 p-4 rounded-2xl shadow-xl border border-white/20 hidden sm:block"
+                            >
+                                <div className="text-2xl font-bold text-primary">10+</div>
+                                <div className="text-xs font-semibold uppercase tracking-wider opacity-60">Years Exp</div>
+                            </motion.div>
+
+                            <motion.div
+                                animate={{ y: [0, 10, 0] }}
+                                transition={{ repeat: Infinity, duration: 5 }}
+                                className="glass absolute -left-10 bottom-20 p-4 rounded-2xl shadow-xl border border-white/20 hidden sm:block"
+                            >
+                                <div className="flex -space-x-2">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white dark:border-gray-900 overflow-hidden">
+                                            <div className="w-full h-full bg-gradient-to-br from-primary to-secondary" />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="text-[10px] font-bold mt-2 uppercase tracking-wide opacity-60">50+ Projects</div>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
@@ -83,3 +132,4 @@ export default function Hero() {
         </section>
     );
 }
+

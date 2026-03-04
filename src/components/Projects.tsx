@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 interface Project {
@@ -20,9 +20,19 @@ export default function Projects() {
 
     const projects: Project[] = [
         {
+            id: 0,
+            title: 'Some - Social Media Hub',
+            description: 'A powerful full-stack social media management platform built with Tailwind CSS v4, allowing users to post content to multiple platforms simultaneously with a single click. Features a modern dashboard for managing drafts, reviews, and publishing schedules.',
+            image: '/projects/some.png',
+            category: 'web',
+            technologies: ['Next.js', 'Prisma', 'Tailwind CSS v4', 'Social APIs'],
+            liveUrl: 'https://some.k2x.tech/',
+            sourceUrl: '',
+        },
+        {
             id: 1,
             title: 'Easypaisa Karobar',
-            description: 'Professional and high-resolution dashboard interface for the Easypaisa Karobar Merchant Portal, featuring a clean UI, structured payment transactions, and user management insights for seamless business operations.',
+            description: 'Professional dashboard interface for Easypaisa Karobar Merchant Portal, featuring structured transactions and user insights.',
             image: '/projects/easypaisa.png',
             category: 'web',
             technologies: ['React js', 'Bootstrap'],
@@ -32,10 +42,10 @@ export default function Projects() {
         {
             id: 2,
             title: 'Clinic Management',
-            description: 'A clean and modern healthcare system dashboard for EIXSYS, providing real-time insights into clinic locations, providers, specialists, and monthly costs with an intuitive and user-friendly interface.',
+            description: 'A modern healthcare system dashboard for EIXSYS, providing real-time insights into clinic locations and specialists.',
             image: '/projects/provider.png',
             category: 'web',
-            technologies: ['Laravel', 'Bootstrap','Jquery'],
+            technologies: ['Laravel', 'Bootstrap', 'Jquery'],
             liveUrl: 'https://provider.click4md.com/',
             sourceUrl: '',
         },
@@ -45,50 +55,20 @@ export default function Projects() {
             description: 'A sleek and customizable portfolio app to showcase your work, skills, and achievements professionally.',
             image: '/projects/portfolio.png',
             category: 'ui',
-            technologies: ['Figma', 'Tailwind CSS','Next js'],
+            technologies: ['Figma', 'Tailwind CSS v4', 'Next js'],
             liveUrl: 'https://tassadaq.vercel.app/',
             sourceUrl: '',
         },
         {
             id: 4,
             title: 'Aurora Admin Panel',
-            description: 'Aurora Admin Panel – An advanced automation dashboard for managing sneaker bot tasks, tracking checkouts, and optimizing purchases with real-time analytics',
+            description: 'Advanced automation dashboard for managing sneaker bot tasks and tracking checkouts with real-time analytics.',
             image: '/projects/aurora.png',
             category: 'ui',
             technologies: ['Html5', 'Bootstrap'],
             liveUrl: 'https://example.com',
             sourceUrl: '',
-        }/*,
-        {
-            id: 5,
-            title: 'Restaurant Website',
-            description: 'A beautiful website for a local restaurant with online ordering.',
-            image: '/projects/project4.jpg',
-            category: 'web',
-            technologies: ['HTML', 'CSS', 'JavaScript', 'PHP'],
-            liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
-        },
-        {
-            id: 6,
-            title: 'Travel Mobile App',
-            description: 'Travel planning mobile app with itinerary management.',
-            image: '/projects/project5.jpg',
-            category: 'app',
-            technologies: ['React Native', 'Node.js', 'MongoDB'],
-            liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
-        },
-        {
-            id: 7,
-            title: 'Dashboard UI Kit',
-            description: 'A comprehensive UI kit for building admin dashboards.',
-            image: '/projects/project6.jpg',
-            category: 'ui',
-            technologies: ['Figma', 'Sketch'],
-            liveUrl: 'https://example.com',
-            sourceUrl: 'https://github.com',
-        },*/
+        }
     ];
 
     const filteredProjects = filter === 'all'
@@ -96,7 +76,7 @@ export default function Projects() {
         : projects.filter(project => project.category === filter);
 
     return (
-        <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+        <section id="projects" className="py-24 bg-gray-50/50 dark:bg-gray-900/50">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     className="text-center mb-16"
@@ -105,125 +85,111 @@ export default function Projects() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">My Projects</h2>
-                    <div className="w-20 h-1 bg-indigo-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                        Explore my latest work and projects. Each project represents a unique challenge and solution.
+                    <h2 className="text-4xl sm:text-5xl font-bold font-outfit text-foreground mb-4">Featured Work</h2>
+                    <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-6"></div>
+                    <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-inter">
+                        A selection of <span className="text-foreground font-semibold">high-impact projects</span> I&apos;ve built for global clients.
                     </p>
                 </motion.div>
 
-                <div className="flex justify-center mb-10">
-                    <div className="flex flex-wrap gap-2 p-1 bg-gray-100 dark:bg-gray-700 rounded-lg">
-                        <FilterButton active={filter === 'all'} onClick={() => setFilter('all')}>All</FilterButton>
-                        <FilterButton active={filter === 'web'} onClick={() => setFilter('web')}>Web</FilterButton>
-                        <FilterButton active={filter === 'app'} onClick={() => setFilter('app')}>App</FilterButton>
-                        <FilterButton active={filter === 'ui'} onClick={() => setFilter('ui')}>UI Design</FilterButton>
+                <div className="flex justify-center mb-12">
+                    <div className="flex flex-wrap items-center justify-center gap-3 p-1.5 glass rounded-2xl">
+                        {['all', 'web', 'app', 'ui'].map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => setFilter(cat as any)}
+                                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${filter === cat
+                                    ? 'bg-primary text-white shadow-lg shadow-primary/25'
+                                    : 'text-gray-500 hover:text-foreground'
+                                    }`}
+                            >
+                                {cat === 'all' ? 'All' : cat === 'web' ? 'Web' : cat === 'app' ? 'Apps' : 'UI Design'}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProjects.map((project, index) => (
-                        <ProjectCard key={project.id} project={project} index={index} />
-                    ))}
-                </div>
+                <motion.div
+                    layout
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {filteredProjects.map((project, index) => (
+                            <ProjectCard key={project.id} project={project} index={index} />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
             </div>
         </section>
     );
 }
 
-interface FilterButtonProps {
-    children: React.ReactNode;
-    active: boolean;
-    onClick: () => void;
-}
-
-function FilterButton({ children, active, onClick }: FilterButtonProps) {
-    return (
-        <button
-            className={`px-5 py-2 rounded-md text-sm font-medium transition-colors ${
-                active
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
-            onClick={onClick}
-        >
-            {children}
-        </button>
-    );
-}
-
-interface ProjectCardProps {
-    project: Project;
-    index: number;
-}
-
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
     return (
         <motion.div
-            className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
+            className="glass-card flex flex-col rounded-[2.5rem] overflow-hidden group border border-slate-200 dark:border-white/5 bg-white/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 transition-all duration-500 shadow-xl hover:shadow-2xl"
         >
-            <div className="relative h-60 w-full">
+            <div className="relative h-72 overflow-hidden">
                 <Image
                     src={project.image}
                     alt={project.title}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    className="object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
                 />
-            </div>
-
-            <div className="p-6">
-        <span className="inline-block px-3 py-1 text-xs font-semibold text-indigo-600 bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-300 rounded-full mb-2">
-          {project.category === 'web' ? 'Web Development' :
-              project.category === 'app' ? 'App Development' : 'UI Design'}
-        </span>
-
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-
-                <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, i) => (
-                        <span
-                            key={i}
-                            className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded"
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-8">
+                    <div className="flex gap-4 w-full transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 delay-100">
+                        <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            className="flex-1 py-4 bg-primary text-white font-black text-center rounded-2xl text-sm shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all hover:-translate-y-1"
                         >
-              {tech}
-            </span>
-                    ))}
-                </div>
-
-                <div className="flex justify-between">
-                    <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium inline-flex items-center transition-colors"
-                    >
-                        Live Demo
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a>
-                    {
-                        project.sourceUrl && (
+                            Live Experience
+                        </a>
+                        {project.sourceUrl && (
                             <a
                                 href={project.sourceUrl}
                                 target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium inline-flex items-center transition-colors"
+                                className="flex-1 py-4 bg-white/10 backdrop-blur-md text-white font-black text-center rounded-2xl text-sm border border-white/20 hover:bg-white/20 transition-all hover:-translate-y-1"
                             >
                                 Source Code
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                                </svg>
                             </a>
-                        )
-                    }
+                        )}
+                    </div>
+                </div>
+            </div>
 
+            <div className="p-10 flex flex-col flex-1">
+                <div className="flex justify-between items-center mb-6">
+                    <span className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] bg-primary/10 text-primary border border-primary/20">
+                        {project.category}
+                    </span>
+                    <div className="flex gap-1">
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                        <div className="h-1.5 w-1.5 rounded-full bg-primary/40" />
+                    </div>
+                </div>
+
+                <h3 className="text-2xl font-black font-outfit text-slate-900 dark:text-white mb-4 group-hover:text-primary transition-colors leading-tight">
+                    {project.title}
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-8 flex-1 font-inter font-medium line-clamp-3">
+                    {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-slate-100 dark:border-white/5">
+                    {project.technologies.map((tech, i) => (
+                        <span
+                            key={i}
+                            className="px-4 py-1.5 text-[10px] font-black bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 rounded-xl border border-slate-200 dark:border-white/10 uppercase tracking-widest"
+                        >
+                            {tech}
+                        </span>
+                    ))}
                 </div>
             </div>
         </motion.div>

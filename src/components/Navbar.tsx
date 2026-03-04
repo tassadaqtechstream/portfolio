@@ -2,121 +2,135 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useTheme } from '@/components/ThemeProvider';
-import { IoMoonOutline, IoSunnyOutline, IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IoMenuOutline, IoCloseOutline, IoMoonOutline, IoSunnyOutline } from 'react-icons/io5';
+import { useTheme } from 'next-themes';
+
+const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Skills', href: '#skills' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Contact', href: '#contact' },
+];
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const { theme, setTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            setIsScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-    };
+    if (!mounted) return null;
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-300 ${
-            scrolled ? 'bg-white dark:bg-gray-900 shadow-lg py-3' : 'bg-transparent py-5'
-        }`}>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between">
-                    <Link href="/" className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                        Tassadaq Hussain
+        <header
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+                    ? 'py-3 bg-white/80 dark:bg-black/80 backdrop-blur-lg border-b border-black/5 dark:border-white/5'
+                    : 'pt-6 bg-transparent'
+                }`}
+        >
+            <div className="flex justify-center w-full pointer-events-none">
+                <motion.nav
+                    initial={{ y: -100, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className={`pointer-events-auto transition-all duration-500 ease-in-out flex items-center justify-between px-6 lg:px-8 border ${isScrolled
+                            ? 'w-[90%] max-w-5xl py-2.5 bg-white dark:bg-gray-950 border-black/5 dark:border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-full'
+                            : 'w-[95%] max-w-7xl py-5 bg-transparent border-transparent'
+                        }`}
+                >
+                    <Link href="/" className="flex items-center group">
+                        <span className="text-xl sm:text-2xl font-black font-outfit tracking-tighter text-slate-900 dark:text-white">
+                            Tassadaq<span className="text-primary group-hover:animate-pulse">.dev</span>
+                        </span>
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center space-x-8">
-                        <NavLink href="#about" text="About" />
-                        <NavLink href="#skills" text="Skills" />
-                        <NavLink href="#projects" text="Projects" />
-                        <NavLink href="#contact" text="Contact" />
+                    <div className="hidden md:flex items-center gap-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-bold font-outfit text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors relative group"
+                            >
+                                {link.name}
+                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                            </Link>
+                        ))}
+
+                        <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2" />
+
                         <button
-                            onClick={toggleTheme}
-                            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                            aria-label="Toggle theme"
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-full text-slate-600 dark:text-slate-300 hover:text-primary transition-all active:scale-90"
                         >
-                            {theme === 'dark' ? (
-                                <IoSunnyOutline className="text-yellow-400 text-xl" />
-                            ) : (
-                                <IoMoonOutline className="text-gray-700 text-xl" />
-                            )}
+                            {theme === 'dark' ? <IoSunnyOutline size={18} /> : <IoMoonOutline size={18} />}
                         </button>
+
+                        <Link
+                            href="#contact"
+                            className="px-6 py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-full text-sm hover:scale-105 transition-transform"
+                        >
+                            Hire Me
+                        </Link>
                     </div>
 
-                    {/* Mobile Navigation Toggle */}
-                    <div className="md:hidden flex items-center">
+                    <div className="flex md:hidden items-center gap-4">
                         <button
-                            onClick={toggleTheme}
-                            className="p-2 mr-4 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                            aria-label="Toggle theme"
+                            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                            className="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-full"
                         >
-                            {theme === 'dark' ? (
-                                <IoSunnyOutline className="text-yellow-400 text-xl" />
-                            ) : (
-                                <IoMoonOutline className="text-gray-700 text-xl" />
-                            )}
+                            {theme === 'dark' ? <IoSunnyOutline size={18} /> : <IoMoonOutline size={18} />}
                         </button>
                         <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-                            aria-label="Toggle menu"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-xl text-slate-900 dark:text-white"
                         >
-                            {isOpen ? (
-                                <IoCloseOutline className="text-gray-700 dark:text-gray-200 text-2xl" />
-                            ) : (
-                                <IoMenuOutline className="text-gray-700 dark:text-gray-200 text-2xl" />
-                            )}
+                            {isMobileMenuOpen ? <IoCloseOutline size={24} /> : <IoMenuOutline size={24} />}
                         </button>
                     </div>
-                </div>
+                </motion.nav>
             </div>
 
-            {/* Mobile Menu */}
-            <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-gray-900 shadow-lg">
-                    <MobileNavLink href="#about" text="About" setIsOpen={setIsOpen} />
-                    <MobileNavLink href="#skills" text="Skills" setIsOpen={setIsOpen} />
-                    <MobileNavLink href="#projects" text="Projects" setIsOpen={setIsOpen} />
-                    <MobileNavLink href="#contact" text="Contact" setIsOpen={setIsOpen} />
-                </div>
-            </div>
-        </nav>
-    );
-}
-
-interface NavLinkProps {
-    href: string;
-    text: string;
-}
-
-function NavLink({ href, text }: NavLinkProps) {
-    return (
-        <Link href={href} className="text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition-colors">
-            {text}
-        </Link>
-    );
-}
-
-interface MobileNavLinkProps extends NavLinkProps {
-    setIsOpen: (isOpen: boolean) => void;
-}
-
-function MobileNavLink({ href, text, setIsOpen }: MobileNavLinkProps) {
-    return (
-        <Link
-            href={href}
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-            onClick={() => setIsOpen(false)}
-        >
-            {text}
-        </Link>
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        className="fixed inset-x-4 top-24 z-40 md:hidden pointer-events-auto"
+                    >
+                        <div className="bg-white dark:bg-gray-950 p-8 rounded-[2rem] border border-black/5 dark:border-white/10 shadow-3xl space-y-6">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="block text-2xl font-bold font-outfit text-slate-900 dark:text-white hover:text-primary transition-colors"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                            <div className="pt-6 border-t border-slate-100 dark:border-slate-800">
+                                <Link
+                                    href="#contact"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-full py-4 bg-primary text-white text-center rounded-2xl font-bold text-lg block"
+                                >
+                                    Let&apos;s Talk
+                                </Link>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </header>
     );
 }
